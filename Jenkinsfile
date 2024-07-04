@@ -18,7 +18,7 @@ pipeline {
                     steps {
                         script {
                             // Execute Maven build
-                            bat 'dir'
+                            bat 'echo %MAVEN_HOME%'
                         }
                     }
                 }
@@ -27,7 +27,7 @@ pipeline {
             steps {
                 script {
                     // Execute Maven build
-                    bat 'mvn clean package'
+                    bat '%MAVEN_HOME%/bin/mvn clean package'
                 }
             }
         }
