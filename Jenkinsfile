@@ -18,7 +18,7 @@ pipeline {
             steps {
                 script {
                     // Execute Maven build
-                    sh 'mvn clean package'
+                    bat 'mvn clean package'
                 }
             }
         }
@@ -26,7 +26,7 @@ pipeline {
         stage('Show JAR Directory') {
             steps {
                 script {
-                    sh "java -jar ${jarPath} ${JAR_ARGUMENT}"
+                    bat "java -jar ${jarPath} ${JAR_ARGUMENT}"
                 }
             }
         }
