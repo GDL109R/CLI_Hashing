@@ -1,6 +1,11 @@
 pipeline {
     agent any
 
+    environment {
+            // Define the name of the jar file that your Maven build produces
+            JAR_NAME = "java-project-1.0-SNAPSHOT.jar"
+    }
+
     stages {
         stage('Clone Repository') {
             steps {
@@ -9,24 +14,40 @@ pipeline {
                     deleteDir()
                     // Clone the repository
                     checkout([$class: 'GitSCM', branches: [[name: '*/master']],
-                              userRemoteConfigs: [[url: 'https://github.com/GDL109R/CLI_Hashing', credentialsId: 'Github-Token']]])
+                              userRemoteConfigs: [[url: 'https://github.com/GDL109R/CLI_Hashing',
+                                                   credentialsId: 'Github-Token']]])
                 }
             }
         }
-        stage('Build') {
+
+        stage('Build with Maven') {
             steps {
-                echo 'Building..'
+                script {
+                    // Execute Maven build
+                    sh 'mvn clean package'
+                }
             }
         }
-        stage('Test') {
+
+        stage('Show JAR Directory') {
             steps {
-                echo 'Testing..'
+                script {
+                    // Find and echo the directory of the built JAR file
+                    def jarPath = sh(script: "find ${WORKSPACE} -name ${JAR_NAME}", returnStdout: true).trim()
+                    if (jarPath) {
+                        echo "JAR file created at: ${jarPath}"
+                    } else {
+                        echo "JAR file not found"
+                    }
+                }
             }
         }
-        stage('Deploy') {
-            steps {
-                echo 'Deploying....'
-            }
+    }
+
+    post {
+        always {
+            // Clean up workspace after build
+            deleteDir()
         }
     }
 }
