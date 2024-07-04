@@ -27,7 +27,7 @@ pipeline {
             steps {
                 script {
                     // Execute Maven build
-                    powershell '%MAVEN_HOME%/bin/mvn clean package'
+                    powershell 'mvn clean package'
                 }
             }
         }
