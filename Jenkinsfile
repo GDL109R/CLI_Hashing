@@ -14,6 +14,15 @@ pipeline {
             }
         }
 
+        stage('Echo dir') {
+                    steps {
+                        script {
+                            // Execute Maven build
+                            bat 'dir'
+                        }
+                    }
+                }
+
         stage('Build with Maven') {
             steps {
                 script {
