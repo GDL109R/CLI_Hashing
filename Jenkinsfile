@@ -10,8 +10,6 @@ pipeline {
                     // Clone the repository
                     checkout([$class: 'GitSCM', branches: [[name: '*/master']],
                               userRemoteConfigs: [[url: 'https://github.com/GDL109R/CLI_Hashing', credentialsId: 'Github-Token']]])
-
-                    sh "ls"
                 }
             }
         }
