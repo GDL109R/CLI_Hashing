@@ -40,7 +40,7 @@ pipeline {
     post {
         always {
             // Clean up workspace after build
-            deleteDir()
+            // deleteDir()
         }
     }
 }
