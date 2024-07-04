@@ -18,7 +18,7 @@ pipeline {
                     steps {
                         script {
                             // Execute Maven build
-                            bat 'echo %MAVEN_HOME%'
+                            powershell 'echo %MAVEN_HOME%'
                         }
                     }
                 }
@@ -27,7 +27,7 @@ pipeline {
             steps {
                 script {
                     // Execute Maven build
-                    bat '%MAVEN_HOME%/bin/mvn clean package'
+                    powershell '%MAVEN_HOME%/bin/mvn clean package'
                 }
             }
         }
@@ -35,7 +35,7 @@ pipeline {
         stage('Show JAR Directory') {
             steps {
                 script {
-                    bat "java -jar ${jarPath} ${JAR_ARGUMENT}"
+                    powershell "java -jar ${jarPath} ${JAR_ARGUMENT}"
                 }
             }
         }
