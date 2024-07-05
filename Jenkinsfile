@@ -27,7 +27,8 @@ pipeline {
         stage('Show JAR Directory') {
             steps {
                 script {
-                    bat "java -jar ${jarPath} ${JAR_ARGUMENT}"
+                    bat "dir"
+                    bat "java -jar ${JAR_NAME} ${JAR_ARGUMENT}"
                 }
             }
         }
