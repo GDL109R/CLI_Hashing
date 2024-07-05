@@ -14,20 +14,12 @@ pipeline {
             }
         }
 
-        stage('Echo dir') {
-                    steps {
-                        script {
-                            // Execute Maven build
-                            powershell 'echo %MAVEN_HOME%'
-                        }
-                    }
-                }
 
         stage('Build with Maven') {
             steps {
                 script {
                     // Execute Maven build
-                    powershell '%MAVEN_HOME%/bin/mvn clean package'
+                    powershell 'mvn clean package'
                 }
             }
         }
